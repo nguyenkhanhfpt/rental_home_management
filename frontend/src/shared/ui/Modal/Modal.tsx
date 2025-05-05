@@ -58,7 +58,7 @@ export const Modal = ({
   return createPortal(
     <div
       ref={overlayRef}
-      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4"
       onClick={handleOverlayClick}
     >
       <div
@@ -67,13 +67,13 @@ export const Modal = ({
         aria-modal="true"
         aria-labelledby={title ? 'modal-title' : undefined}
         className={twMerge(
-          'bg-white rounded-lg shadow-xl w-full',
+          'w-full rounded-lg bg-white shadow-xl',
           MODAL_SIZES[size],
           className
         )}
       >
         {title && (
-          <div className="px-6 py-4 border-b border-gray-200">
+          <div className="border-b border-gray-200 px-6 py-4">
             <h2 id="modal-title" className="text-xl font-semibold">
               {title}
             </h2>
@@ -84,4 +84,4 @@ export const Modal = ({
     </div>,
     document.body
   );
-}; 
+};

@@ -1,7 +1,8 @@
 import React, { InputHTMLAttributes, forwardRef } from 'react';
 import { cn } from '../../../shared/lib/utils';
 
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   variant?: 'default' | 'error';
   size?: 'sm' | 'md' | 'lg';
   isFullWidth?: boolean;
@@ -21,11 +22,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       id,
       ...props
     },
-    ref,
+    ref
   ) => {
     const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
 
-    const baseStyles = 'rounded-md border bg-white px-3 transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
+    const baseStyles =
+      'rounded-md border bg-white px-3 transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
 
     const variants = {
       default: 'border-gray-300 focus-visible:ring-primary-500',
@@ -56,7 +58,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             variants[variant],
             sizes[size],
             isFullWidth && 'w-full',
-            className,
+            className
           )}
           aria-invalid={variant === 'error'}
           aria-errormessage={error ? `${inputId}-error` : undefined}
@@ -72,7 +74,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
-Input.displayName = 'Input'; 
+Input.displayName = 'Input';

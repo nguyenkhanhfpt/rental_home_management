@@ -2,7 +2,17 @@ import { ElementType, HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface TypographyProps extends HTMLAttributes<HTMLElement> {
-  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'caption' | 'overline';
+  variant?:
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'body1'
+    | 'body2'
+    | 'caption'
+    | 'overline';
   component?: ElementType;
   gutterBottom?: boolean;
 }
@@ -20,7 +30,10 @@ const VARIANT_STYLES = {
   overline: 'text-xs uppercase tracking-wider',
 };
 
-const VARIANT_MAPPINGS: Record<TypographyProps['variant'] & string, ElementType> = {
+const VARIANT_MAPPINGS: Record<
+  TypographyProps['variant'] & string,
+  ElementType
+> = {
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',
@@ -42,7 +55,7 @@ export const Typography = ({
   ...props
 }: TypographyProps) => {
   const Component = component || VARIANT_MAPPINGS[variant];
-  
+
   const classes = twMerge(
     VARIANT_STYLES[variant],
     gutterBottom && 'mb-4',
@@ -54,4 +67,4 @@ export const Typography = ({
       {children}
     </Component>
   );
-}; 
+};

@@ -53,4 +53,4 @@ describe('ErrorBoundary', () => {
 
     console.error = originalError;
   });
-}); 
+});

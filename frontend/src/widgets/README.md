@@ -19,4 +19,4 @@ widgets/
 - Keep widgets focused on composition and layout
 - Avoid complex business logic in widgets
 - Use shared UI components when possible
-- Each widget should be independent and reusable 
+- Each widget should be independent and reusable

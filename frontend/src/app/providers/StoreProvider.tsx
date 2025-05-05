@@ -8,9 +8,5 @@ interface StoreProviderProps {
 export const StoreProvider = ({ children }: StoreProviderProps) => {
   const theme = useStore((state) => state.theme);
 
-  return (
-    <div className={theme}>
-      {children}
-    </div>
-  );
-}; 
+  return <div className={theme}>{children}</div>;
+};

@@ -37,4 +37,4 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       </div>
     );
   }
-); 
+);

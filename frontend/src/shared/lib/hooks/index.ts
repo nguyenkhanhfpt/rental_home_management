@@ -14,14 +14,15 @@ export const useLocalStorage = <T>(key: string, initialValue: T) => {
   const setValue = useCallback(
     (value: T | ((val: T) => T)) => {
       try {
-        const valueToStore = value instanceof Function ? value(storedValue) : value;
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
         setStoredValue(valueToStore);
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       } catch (error) {
         console.error(error);
       }
     },
-    [key, storedValue],
+    [key, storedValue]
   );
 
   return [storedValue, setValue] as const;
@@ -39,7 +40,9 @@ export const useDebounce = <T>(value: T, delay: number): T => {
 };
 
 export const useMediaQuery = (query: string): boolean => {
-  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+  const [matches, setMatches] = useState(
+    () => window.matchMedia(query).matches
+  );
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(query);
@@ -54,7 +57,7 @@ export const useMediaQuery = (query: string): boolean => {
 
 export const useOnClickOutside = (
   ref: React.RefObject<HTMLElement>,
-  handler: (event: MouseEvent | TouchEvent) => void,
+  handler: (event: MouseEvent | TouchEvent) => void
 ) => {
   useEffect(() => {
     const listener = (event: MouseEvent | TouchEvent) => {
@@ -72,4 +75,4 @@ export const useOnClickOutside = (
       document.removeEventListener('touchstart', listener);
     };
   }, [ref, handler]);
-}; 
+};

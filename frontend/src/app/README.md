@@ -20,4 +20,4 @@ app/
 - Handle app initialization
 - Manage global error boundaries
 - Configure global styles and themes
-- Define app-wide types and interfaces 
+- Define app-wide types and interfaces
