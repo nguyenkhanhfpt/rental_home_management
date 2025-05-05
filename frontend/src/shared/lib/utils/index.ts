@@ -26,7 +26,8 @@ export const isValidEmail = (email: string) => {
   return emailRegex.test(email);
 };
 
-export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 export const getErrorMessage = (error: unknown) => {
   if (error instanceof Error) return error.message;
@@ -43,7 +44,7 @@ export const formatNumber = (num: number) => {
 
 export const debounce = <F extends (...args: unknown[]) => unknown>(
   func: F,
-  wait: number,
+  wait: number
 ) => {
   let timeout: NodeJS.Timeout;
 
@@ -56,4 +57,4 @@ export const debounce = <F extends (...args: unknown[]) => unknown>(
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
   };
-}; 
+};

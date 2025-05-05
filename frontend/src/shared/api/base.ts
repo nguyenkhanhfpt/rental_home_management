@@ -27,8 +27,10 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const refreshToken = localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
-        
+        const refreshToken = localStorage.getItem(
+          LOCAL_STORAGE_KEYS.REFRESH_TOKEN
+        );
+
         if (!refreshToken) {
           throw new Error('No refresh token found');
         }
@@ -53,5 +55,5 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  },
-); 
+  }
+);

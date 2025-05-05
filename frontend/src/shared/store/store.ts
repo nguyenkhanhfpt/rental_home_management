@@ -21,4 +21,4 @@ export const useStore = create<Store>()(
       partialize: (state) => ({ theme: state.theme }),
     }
   )
-); 
+);

@@ -27,4 +27,4 @@ export interface ApiRequestConfig {
   data?: unknown;
   params?: Record<string, unknown>;
   headers?: Record<string, string>;
-} 
+}

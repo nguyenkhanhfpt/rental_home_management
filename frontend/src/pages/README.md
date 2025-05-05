@@ -20,4 +20,4 @@ pages/
 - Keep page-specific logic minimal
 - Handle routing and navigation
 - Each page should be lazy-loaded
-- Use shared layouts when possible 
+- Use shared layouts when possible

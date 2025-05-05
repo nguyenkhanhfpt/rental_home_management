@@ -1,7 +1,11 @@
 import { forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { ButtonProps } from '../types';
-import { BUTTON_BASE_CLASSES, BUTTON_SIZES, BUTTON_VARIANTS } from '../constants';
+import {
+  BUTTON_BASE_CLASSES,
+  BUTTON_SIZES,
+  BUTTON_VARIANTS,
+} from '../constants';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -38,7 +42,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {isLoading && (
           <svg
-            className="animate-spin -ml-1 mr-3 h-5 w-5"
+            className="-ml-1 mr-3 h-5 w-5 animate-spin"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -64,4 +68,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       </button>
     );
   }
-); 
+);

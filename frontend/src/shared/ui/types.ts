@@ -8,7 +8,9 @@ export interface BaseProps {
   children?: ReactNode;
 }
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, BaseProps {
+export interface ButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    BaseProps {
   variant?: Variant;
   size?: Size;
   isLoading?: boolean;
@@ -16,4 +18,4 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, Ba
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   fullWidth?: boolean;
-} 
+}

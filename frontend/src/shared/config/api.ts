@@ -25,4 +25,4 @@ export const API_ENDPOINTS = {
     UPDATE: (id: string) => `/articles/${id}`,
     DELETE: (id: string) => `/articles/${id}`,
   },
-} as const; 
+} as const;

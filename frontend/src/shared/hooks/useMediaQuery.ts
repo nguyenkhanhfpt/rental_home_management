@@ -13,16 +13,16 @@ export function useMediaQuery(query: string): boolean {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(query);
-    
+
     // Handle change
     const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
-    
+
     // Add event listener
     mediaQuery.addEventListener('change', handler);
-    
+
     // Remove event listener on cleanup
     return () => mediaQuery.removeEventListener('change', handler);
   }, [query]);
 
   return matches;
-} 
+}

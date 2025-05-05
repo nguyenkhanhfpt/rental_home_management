@@ -1,4 +1,9 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from 'axios';
 import { API_CONFIG } from '@shared/config/api';
 import { ApiError, ApiResponse } from './types';
 import { useStore } from '@shared/store/store';
@@ -50,7 +55,9 @@ class ApiClient {
     );
   }
 
-  private async request<T>(config: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  private async request<T>(
+    config: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     const response: AxiosResponse<T> = await this.client.request(config);
     return {
       data: response.data,
@@ -59,25 +66,43 @@ class ApiClient {
     };
   }
 
-  async get<T>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async get<T>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     return this.request<T>({ ...config, method: 'GET', url });
   }
 
-  async post<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async post<T>(
+    url: string,
+    data?: unknown,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     return this.request<T>({ ...config, method: 'POST', url, data });
   }
 
-  async put<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async put<T>(
+    url: string,
+    data?: unknown,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     return this.request<T>({ ...config, method: 'PUT', url, data });
   }
 
-  async delete<T>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async delete<T>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     return this.request<T>({ ...config, method: 'DELETE', url });
   }
 
-  async patch<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async patch<T>(
+    url: string,
+    data?: unknown,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     return this.request<T>({ ...config, method: 'PATCH', url, data });
   }
 }
 
-export const apiClient = new ApiClient(); 
+export const apiClient = new ApiClient();

@@ -7,6 +7,7 @@ export const App = () => {
       <div className="min-h-screen bg-background text-foreground">
         <Routes>
           <Route path="/" element={<div>Rental Home Management</div>} />
+          <Route path="/home" element={<div>Home Page</div>} />
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
       </div>

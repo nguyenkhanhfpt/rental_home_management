@@ -3,12 +3,14 @@ export const isValidEmail = (email: string): boolean => {
   return emailRegex.test(email);
 };
 
-export const isValidPassword = (password: string): {
+export const isValidPassword = (
+  password: string
+): {
   isValid: boolean;
   errors: string[];
 } => {
   const errors: string[] = [];
-  
+
   if (password.length < 8) {
     errors.push('Password must be at least 8 characters long');
   }
@@ -22,7 +24,9 @@ export const isValidPassword = (password: string): {
     errors.push('Password must contain at least one number');
   }
   if (!/[!@#$%^&*]/.test(password)) {
-    errors.push('Password must contain at least one special character (!@#$%^&*)');
+    errors.push(
+      'Password must contain at least one special character (!@#$%^&*)'
+    );
   }
 
   return {
@@ -43,4 +47,4 @@ export const isValidUrl = (url: string): boolean => {
 export const isValidPhoneNumber = (phone: string): boolean => {
   const phoneRegex = /^\+?[\d\s-()]{10,}$/;
   return phoneRegex.test(phone);
-}; 
+};

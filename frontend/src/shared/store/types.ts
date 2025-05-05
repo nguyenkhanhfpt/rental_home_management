@@ -16,4 +16,4 @@ export interface Store extends AppState {
   setTheme: (theme: AppState['theme']) => void;
   setUser: (user: User | null) => void;
   logout: () => void;
-} 
+}
