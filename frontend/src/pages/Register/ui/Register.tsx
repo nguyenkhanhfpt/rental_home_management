@@ -1,65 +1,22 @@
 import { Link } from 'react-router-dom';
+import {Input} from "@widgets/form/ui/Input.tsx";
+import {useLoginForm} from "../model/Register.ts"
 
 export const Register = () => {
+  const { formData, handleChange } = useLoginForm();
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-lg space-y-6">
         <form className="space-y-6 rounded-xl bg-white p-6 shadow-md">
           {/* Name */}
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Your name"
-            />
-            <p className="mt-1 text-sm text-red-600">Name is required</p>
-          </div>
+          <Input label="Name" name="name" value={formData.name} placeholder="Nguyen Van A" onChange={handleChange} />
 
           {/* Email */}
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="you@example.com"
-            />
-            <p className="mt-1 text-sm text-red-600">
-              Please enter a valid email
-            </p>
-          </div>
+          <Input label="Email" type="email" name="email" value={formData.email} placeholder="you@example.com" onChange={handleChange} />
 
           {/* Password */}
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="••••••••"
-            />
-            <p className="mt-1 text-sm text-red-600">Password is required</p>
-          </div>
+          <Input label="Password" type="password" name="password" value={formData.password} placeholder="••••••••" onChange={handleChange} />
 
           {/* Submit Button */}
           <div>
