@@ -1,6 +1,7 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany, OneToOne } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { HomeEntity } from '@database/entities/home.entity';
+import { UserInfoEntity } from '@database/entities/user-info.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity extends BaseEntity {
@@ -15,4 +16,7 @@ export class UserEntity extends BaseEntity {
 
   @OneToMany(() => HomeEntity, (home) => home.user)
   homes: HomeEntity[];
+
+  @OneToOne(() => UserInfoEntity, (userInfo) => userInfo.user)
+  info: UserInfoEntity;
 }

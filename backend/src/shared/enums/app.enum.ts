@@ -11,3 +11,9 @@ export enum RoomStatus {
   AVAILABLE = 'available',
   FIXING = 'fixing',
 }
+
+export enum RoomInvoiceStatus {
+  PENDING = 'pending',
+  PAID = 'paid',
+  CANCELLED = 'cancelled',
+}
