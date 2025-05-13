@@ -8,7 +8,9 @@
       "isNotEmpty": "Name is required"
     },
     "email": {
-      "isNotEmpty": "Email is required"
+      "isNotEmpty": "Email is required",
+      "matches": "Email format is incorrect",
+      "isExistEmail": "Email already exists"
     },
     "password": {
       "isNotEmpty": "Password is required"
