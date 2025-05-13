@@ -33,6 +33,7 @@ export class InternalServerExceptionFilter implements ExceptionFilter {
       code,
       message: I18nContext.current().t(`error.${code}`),
     };
+    console.log(exception);
 
     this.loggerService.logErrorDetail(
       exception,
