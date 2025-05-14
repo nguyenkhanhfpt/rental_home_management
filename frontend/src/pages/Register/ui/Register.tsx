@@ -1,22 +1,45 @@
 import { Link } from 'react-router-dom';
-import {Input} from "@widgets/form/ui/Input.tsx";
-import {useLoginForm} from "../model/Register.ts"
+import { Input } from '@widgets/form/ui/Input.tsx';
+import { useLoginForm } from '../model/Register.ts';
 
 export const Register = () => {
-  const { formData, handleChange } = useLoginForm();
+  const { formData, handleChange, formError } = useLoginForm();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-lg space-y-6">
         <form className="space-y-6 rounded-xl bg-white p-6 shadow-md">
           {/* Name */}
-          <Input label="Name" name="name" value={formData.name} placeholder="Nguyen Van A" onChange={handleChange} />
+          <Input
+            label="Name"
+            name="name"
+            value={formData.name}
+            placeholder="Nguyen Van A"
+            onChange={handleChange}
+            error={formError.name}
+          />
 
           {/* Email */}
-          <Input label="Email" type="email" name="email" value={formData.email} placeholder="you@example.com" onChange={handleChange} />
+          <Input
+            label="Email"
+            type="email"
+            name="email"
+            value={formData.email}
+            placeholder="you@example.com"
+            onChange={handleChange}
+            error={formError.email}
+          />
 
           {/* Password */}
-          <Input label="Password" type="password" name="password" value={formData.password} placeholder="••••••••" onChange={handleChange} />
+          <Input
+            label="Password"
+            type="password"
+            name="password"
+            value={formData.password}
+            placeholder="••••••••"
+            onChange={handleChange}
+            error={formError.password}
+          />
 
           {/* Submit Button */}
           <div>

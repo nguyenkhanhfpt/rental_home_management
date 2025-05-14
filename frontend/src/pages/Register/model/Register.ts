@@ -1,33 +1,43 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export interface RegisterSchema {
-    name: string;
-    email: string;
-    password: string;
+  name: string;
+  email: string;
+  password: string;
 }
 
 const initialRegisterState: RegisterSchema = {
-    name: "",
-    email: "",
-    password: "",
+  name: '',
+  email: '',
+  password: '',
+};
+
+const internalRegisterErrorState: RegisterSchema = {
+  name: '',
+  email: '',
+  password: '',
 };
 
 export const useLoginForm = () => {
-    const [formData, setFormData] = useState<RegisterSchema>(initialRegisterState);
+  const [formData, setFormData] =
+    useState<RegisterSchema>(initialRegisterState);
+  const [formError, setFormError] = useState<RegisterSchema>(
+    internalRegisterErrorState
+  );
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-    console.log(formData);
-
-    return {
-        formData,
-        handleChange,
-        setFormData, // optionally expose this too
-    };
+  return {
+    formData,
+    formError,
+    handleChange,
+    setFormData, // optionally expose this too
+    setFormError,
+  };
 };

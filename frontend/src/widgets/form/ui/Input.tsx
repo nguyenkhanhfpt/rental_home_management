@@ -27,7 +27,7 @@ export const Input: React.FC<InputProps> = ({
             htmlFor={name}
             className="block text-sm font-medium text-gray-700"
           >
-              {label}
+            {label}
           </label>
         )}
         <input
