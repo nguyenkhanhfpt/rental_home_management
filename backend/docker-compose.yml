@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: production
-    container_name: app-api
+    container_name: rental-home-api
     tty: true
     ports:
       - "${APP_PORT}:${APP_PORT}"
@@ -15,14 +15,14 @@ services:
     depends_on:
       - database
     networks:
-      - app-network
+      - rental-home-network
 
   worker:
     build:
       context: .
       dockerfile: Dockerfile
       target: production
-    container_name: app-worker
+    container_name: rental-home-worker
     tty: true
     volumes:
       - .:/app
@@ -31,11 +31,11 @@ services:
     depends_on:
       - database
     networks:
-      - app-network
+      - rental-home-network
 
   database:
     image: postgres:15
-    container_name: app-database
+    container_name: rental-home-database
     volumes:
       - database-data:/var/lib/postgresql/data
     restart: always
@@ -47,11 +47,11 @@ services:
       POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
       TZ: "UTC"
     networks:
-      - app-network
+      - rental-home-network
 
   redis:
     image: redis/redis-stack:latest
-    container_name: app-redis
+    container_name: rental-home-redis
     restart: always
     ports:
       - "6379:6379"
@@ -62,12 +62,12 @@ services:
     environment:
       REDIS_ARGS: "--requirepass redispass"
     networks:
-      - app-network
+      - rental-home-network
 
 volumes:
   database-data:
   redis_data:
 
 networks:
-  app-network:
+  rental-home-network:
     driver: bridge
