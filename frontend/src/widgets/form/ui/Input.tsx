@@ -8,6 +8,7 @@ interface InputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
+  disabled?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -18,6 +19,7 @@ export const Input: React.FC<InputProps> = ({
   value,
   onChange,
   error,
+  disabled = false,
 }) => {
   return (
     <>
@@ -38,6 +40,7 @@ export const Input: React.FC<InputProps> = ({
           onChange={onChange}
           className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           placeholder={placeholder}
+          disabled={disabled}
         />
         <p className="mt-1 text-sm text-red-600">{error}</p>
       </div>
