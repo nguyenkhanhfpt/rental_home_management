@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: development
-    container_name: app-api
+    container_name: rental-home-api
     tty: true
     ports:
       - "${APP_PORT}:${APP_PORT}"
@@ -15,14 +15,14 @@ services:
     depends_on:
       - database
     networks:
-      - app-network
+      - rental-home-network
 
   worker:
     build:
       context: .
       dockerfile: Dockerfile
       target: development
-    container_name: app-worker
+    container_name: rental-home-worker
     tty: true
     volumes:
       - .:/app
@@ -31,13 +31,13 @@ services:
     depends_on:
       - database
     networks:
-      - app-network
+      - rental-home-network
 
   database:
     image: postgres:15
-    container_name: app-database
+    container_name: rental-home-database
     volumes:
-      - database-data:/var/lib/postgresql/data
+      - rental-home-database-data:/var/lib/postgresql/data
     restart: always
     ports:
       - "${DATABASE_PORT}:5432"
@@ -47,43 +47,43 @@ services:
       POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
       TZ: "UTC"
     networks:
-      - app-network
+      - rental-home-network
 
   localstack:
     image: localstack/localstack
-    container_name: localstack
+    container_name: rental-home-localstack
     ports:
       - "4566:4566"
     environment:
       - SERVICES=s3
       - GATEWAY_LISTEN=0.0.0.0:4566
     volumes:
-      - localstack-data:/var/lib/localstack # Persist data
-      - localstack-docker-sock:/var/run/docker.sock
+      - rental-home-localstack-data:/var/lib/localstack # Persist data
+      - rental-home-localstack-docker-sock:/var/run/docker.sock
     networks:
-      - app-network
+      - rental-home-network
 
   redis:
     image: redis/redis-stack:latest
-    container_name: app-redis
+    container_name: rental-home-redis
     restart: always
     ports:
       - "6379:6379"
     volumes:
-      - redis_data:/data
+      - rental-home-redis_data:/data
     healthcheck:
       test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
     environment:
       REDIS_ARGS: "--requirepass redispass"
     networks:
-      - app-network
+      - rental-home-network
 
 volumes:
-  database-data:
-  localstack-data:
-  localstack-docker-sock:
-  redis_data:
+  rental-home-database-data:
+  rental-home-localstack-data:
+  rental-home-localstack-docker-sock:
+  rental-home-redis_data:
 
 networks:
-  app-network:
+  rental-home-network:
       driver: bridge

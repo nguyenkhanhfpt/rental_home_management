@@ -6,7 +6,7 @@ import { RefreshTokenStrategy } from '@modules/auth/strategies/refresh-token.str
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '@database/entities/user.entity';
-import { IsExistEmailValidator } from '@shared/validators/is-exist-email.validator';
+import { IsExistEmailValidator } from '@shared/validators';
 import { UsersModule } from '@modules/users/users.module';
 import { UsersService } from '@modules/users/users.service';
 

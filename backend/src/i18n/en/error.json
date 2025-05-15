@@ -15,5 +15,20 @@
     "password": {
       "isNotEmpty": "Password is required"
     }
+  },
+  "homeEntity": {
+    "name": {
+      "isNotEmpty": "Name is required"
+    },
+    "shortName": {
+      "isNotEmpty": "Short name is required"
+    },
+    "address": {
+      "isNotEmpty": "Address is required"
+    },
+    "status": {
+      "isNotEmpty": "Status is required",
+      "isEnum": "Status is invalid"
+    }
   }
 }
