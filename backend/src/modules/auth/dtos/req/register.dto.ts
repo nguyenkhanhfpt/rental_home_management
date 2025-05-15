@@ -1,6 +1,6 @@
 import { IsNotEmpty, Matches } from 'class-validator';
 import { UserEntity } from '@database/entities/user.entity';
-import { IsExistEmail } from '@shared/validators/is-exist-email.validator';
+import { IsExistEmail } from '@shared/validators';
 import { ValidateConstant } from '@shared/constants/validate.constant';
 
 export class RegisterDto {
