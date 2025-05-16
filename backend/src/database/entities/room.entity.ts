@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { RoomStatus } from '@shared/enums/app.enum';
 import { HomeEntity } from '@database/entities/home.entity';
@@ -8,6 +15,7 @@ import { RoomInvoicesEntity } from '@database/entities/room-invoices.entity';
 @Entity({ name: 'rooms' })
 export class RoomEntity extends BaseEntity {
   @ManyToOne(() => HomeEntity, (home) => home.rooms)
+  @JoinColumn({ name: 'home_id' })
   home: HomeEntity;
 
   @OneToOne(() => RoomInfoEntity, (roomInfo) => roomInfo.room)
