@@ -16,6 +16,7 @@ import { LoggerModule } from '@modules/logger/logger.module';
 import { LoggerMiddleware } from '@shared/middlewares/logger.middleware';
 import { ClsModule } from 'nestjs-cls';
 import { HomeModule } from '@modules/home/home.module';
+import { RoomModule } from '@modules/room/room.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { HomeModule } from '@modules/home/home.module';
     AuthModule,
     QueueModule,
     HomeModule,
+    RoomModule,
   ],
   controllers: [AppController],
   providers: [
