@@ -8,6 +8,12 @@ import { API_CONFIG } from '@shared/config/api';
 import { ApiError, ApiResponse } from './types';
 import { useStore } from '@shared/store/store';
 
+interface ValidationErrorResponse {
+  resource: string;
+  field: string;
+  message: string;
+}
+
 class ApiClient {
   private client: AxiosInstance;
 
@@ -37,11 +43,13 @@ class ApiClient {
     // Response interceptor
     this.client.interceptors.response.use(
       (response) => response,
-      (error: AxiosError<{ message?: string; code?: string }>) => {
+      (error: AxiosError<ValidationErrorResponse[]>) => {
+        console.log(error.response);
         const apiError: ApiError = {
-          message: error.response?.data?.message || 'An error occurred',
-          code: error.response?.data?.code,
+          message: error.message || 'An error occurred',
+          code: error.code,
           status: error.response?.status,
+          errors: error.response?.data || [],
         };
 
         // Handle specific error cases

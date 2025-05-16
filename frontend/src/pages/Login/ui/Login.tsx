@@ -3,12 +3,16 @@ import { Input } from '@widgets/form/ui/Input.tsx';
 import { useLoginForm } from '../model/Login.ts';
 
 export const Login = () => {
-  const { formData, formError, handleChange } = useLoginForm();
+  const { formData, formErrors, loading, handleChange, handleSubmit } =
+    useLoginForm();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-lg space-y-6">
-        <form className="space-y-6 rounded-xl bg-white p-6 shadow-md">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 rounded-xl bg-white p-6 shadow-md"
+        >
           {/* Email */}
           <Input
             label="Email"
@@ -17,7 +21,8 @@ export const Login = () => {
             value={formData.email}
             placeholder="you@example.com"
             onChange={handleChange}
-            error={formError.email}
+            disabled={loading}
+            error={formErrors.email}
           />
           {/* Password */}
           <Input
@@ -27,24 +32,54 @@ export const Login = () => {
             value={formData.password}
             placeholder="••••••••"
             onChange={handleChange}
-            error={formError.password}
+            disabled={loading}
+            error={formErrors.password}
           />
+
+          {/* Error Message */}
+          {(formErrors.email || formErrors.password) && (
+            <div className="rounded-md bg-red-50 p-4">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <svg
+                    className="h-5 w-5 text-red-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-red-700">Login failed</p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Submit Button */}
           <div>
             <button
               type="submit"
-              className="w-full rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              disabled={loading}
+              className="w-full rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-indigo-300"
             >
-              Log In
+              {loading ? 'Logging in...' : 'Log In'}
             </button>
           </div>
         </form>
 
         {/* Below Form Links */}
         <div className="flex justify-between px-2 text-sm text-gray-600">
-          <a href="#" className="font-medium text-indigo-600 hover:underline">
+          <Link
+            to="/forgot-password"
+            className="font-medium text-indigo-600 hover:underline"
+          >
             Forgot password?
-          </a>
+          </Link>
           <Link
             to="/register"
             className="font-medium text-indigo-600 hover:underline"
