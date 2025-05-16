@@ -22,8 +22,8 @@ export class RoomEntity extends BaseEntity {
   @Column({ name: 'short_name' })
   shortName: string;
 
-  @Column({ name: 'address', type: 'text' })
-  address: string;
+  @Column({ name: 'description', type: 'text', nullable: true })
+  description: string;
 
   @Column({ name: 'home_id' })
   homeId: number;

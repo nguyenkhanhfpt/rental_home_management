@@ -1,7 +1,8 @@
+import 'reflect-metadata';
+
 import * as dotenv from 'dotenv';
 dotenv.config();
 import { DataSource } from 'typeorm';
-import { join } from 'path';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 const configPostgresConnection: PostgresConnectionOptions = {
@@ -12,8 +13,8 @@ const configPostgresConnection: PostgresConnectionOptions = {
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
   synchronize: process.env.DATABASE_SYNCHRONIZE === 'true',
-  entities: [join(__dirname, '../database/entities/*.entity{.ts,.js}')],
-  migrations: [join(__dirname, '../database/migrations/*{.ts,.js}')],
+  entities: [__dirname + '/entities/**/*{.ts,.js}'],
+  migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
   dropSchema: false,
 };
 
