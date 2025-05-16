@@ -3,8 +3,8 @@ import { Input } from '@widgets/form/ui/Input.tsx';
 import { useRegisterForm } from '../model/Register.ts';
 
 export const Register = () => {
-  const { formData, formError, loading, handleChange, handleSubmit } =
-      useRegisterForm();
+  const { formData, formErrors, loading, handleChange, handleSubmit } =
+    useRegisterForm();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
@@ -21,6 +21,7 @@ export const Register = () => {
             placeholder="Nguyen Van A"
             onChange={handleChange}
             disabled={loading}
+            error={formErrors.name}
           />
 
           {/* Email */}
@@ -32,6 +33,7 @@ export const Register = () => {
             placeholder="you@example.com"
             onChange={handleChange}
             disabled={loading}
+            error={formErrors.email}
           />
 
           {/* Password */}
@@ -43,10 +45,11 @@ export const Register = () => {
             placeholder="••••••••"
             onChange={handleChange}
             disabled={loading}
+            error={formErrors.password}
           />
 
           {/* Error Message */}
-          {formError && (
+          {(formErrors.name || formErrors.email || formErrors.password) && (
             <div className="rounded-md bg-red-50 p-4">
               <div className="flex">
                 <div className="flex-shrink-0">
@@ -63,7 +66,7 @@ export const Register = () => {
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm text-red-700">{formError}</p>
+                  <p className="text-sm text-red-700">Register failed</p>
                 </div>
               </div>
             </div>

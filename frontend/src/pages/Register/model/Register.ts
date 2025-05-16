@@ -9,45 +9,33 @@ export interface RegisterSchema {
   password: string;
 }
 
+interface ValidationError {
+  resource: string;
+  field: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  password?: string;
+}
+
 const initialFormData: RegisterSchema = {
   name: '',
   email: '',
   password: '',
 };
 
-// const internalRegisterErrorState: RegisterSchema = {
-//   name: '',
-//   email: '',
-//   password: '',
-// };
-
-// export const useLoginForm = () => {
-//   const [formData, setFormData] =
-//     useState<RegisterSchema>(initialRegisterState);
-//   const [formError, setFormError] = useState<RegisterSchema>(
-//     internalRegisterErrorState
-//   );
-//
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const { name, value } = e.target;
-//     setFormData((prev) => ({
-//       ...prev,
-//       [name]: value,
-//     }));
-//   };
-//
-//   return {
-//     formData,
-//     formError,
-//     handleChange,
-//     setFormData, // optionally expose this too
-//     setFormError,
-//   };
-// };
+const initialFormErrors: FormErrors = {
+  name: '',
+  email: '',
+  password: '',
+};
 
 export const useRegisterForm = () => {
   const [formData, setFormData] = useState<RegisterRequest>(initialFormData);
-  const [formError, setFormError] = useState<string | null>(null);
+  const [formErrors, setFormErrors] = useState<FormErrors>(initialFormErrors);
   const { register, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -57,31 +45,36 @@ export const useRegisterForm = () => {
       ...prev,
       [name]: value,
     }));
+    // Clear error when user starts typing
+    setFormErrors((prev) => ({
+      ...prev,
+      [name]: '',
+    }));
   };
 
   const validateForm = () => {
-    if (!formData.name.trim()) {
-      setFormError('Name is required');
-      return false;
-    }
-    if (!formData.email.trim()) {
-      setFormError('Email is required');
-      return false;
-    }
-    if (!formData.password.trim()) {
-      setFormError('Password is required');
-      return false;
-    }
-    if (formData.password.length < 6) {
-      setFormError('Password must be at least 6 characters');
-      return false;
-    }
+    // if (!formData.name.trim()) {
+    //   setFormError('Name is required');
+    //   return false;
+    // }
+    // if (!formData.email.trim()) {
+    //   setFormError('Email is required');
+    //   return false;
+    // }
+    // if (!formData.password.trim()) {
+    //   setFormError('Password is required');
+    //   return false;
+    // }
+    // if (formData.password.length < 6) {
+    //   setFormError('Password must be at least 6 characters');
+    //   return false;
+    // }
     return true;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormError(null);
+    setFormErrors(initialFormErrors);
 
     if (!validateForm()) {
       return;
@@ -91,13 +84,30 @@ export const useRegisterForm = () => {
       await register(formData);
       navigate('/'); // Redirect to home page after successful registration
     } catch (error: any) {
-      setFormError(error.message || 'Registration failed');
+      if (Array.isArray(error.errors)) {
+        const validationErrors = error.errors as ValidationError[];
+        const newErrors: FormErrors = { ...initialFormErrors };
+
+        validationErrors.forEach((err) => {
+          if (err.field in newErrors) {
+            newErrors[err.field as keyof FormErrors] = err.message;
+          }
+        });
+
+        setFormErrors(newErrors);
+      } else {
+        setFormErrors({
+          name: error.message || 'Registration failed',
+          email: error.message || 'Registration failed',
+          password: error.message || 'Registration failed',
+        });
+      }
     }
   };
 
   return {
     formData,
-    formError,
+    formErrors,
     loading,
     handleChange,
     handleSubmit,
