@@ -13,7 +13,7 @@ import { QueueModule } from '@modules/queue/queue.module';
 import { HeaderResolver, I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
 import { LoggerModule } from '@modules/logger/logger.module';
-import { LoggerMiddleware } from '@shared/middlewares/logger.middleware';
+import { LoggerMiddleware } from '@shared/middlewares';
 import { ClsModule } from 'nestjs-cls';
 import { HomeModule } from '@modules/home/home.module';
 import { RoomModule } from '@modules/room/room.module';

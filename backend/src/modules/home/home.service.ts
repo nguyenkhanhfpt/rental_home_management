@@ -14,6 +14,7 @@ export class HomeService {
 
   async getList(userId: number): Promise<HomeEntity[]> {
     return this.homeRepository.find({
+      relations: ['rooms'],
       where: {
         userId,
       },

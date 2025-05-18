@@ -7,7 +7,7 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { errorCodeConstant } from '@shared/constants/error-code.constant';
+import { ErrorCodeConstant } from '@shared/constants';
 import { BadRequestErrorDto } from '@shared/dtos/bad-request-error.dto';
 import { t } from '@shared/utils';
 import { isArray, isEmpty, ValidationError } from 'class-validator';
@@ -98,7 +98,7 @@ export class BadRequestExceptionFilter implements ExceptionFilter {
             const { resource } =
               target?.constructor as unknown as ITargetConstructor;
             const code =
-              errorCodeConstant[`${camelCase(resource)}`]?.[`${property}`]?.[
+              ErrorCodeConstant[`${camelCase(resource)}`]?.[`${property}`]?.[
                 `${validation}`
               ];
             const message = t(

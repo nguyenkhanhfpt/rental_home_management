@@ -8,5 +8,6 @@ import { HomeEntity } from '@database/entities/home.entity';
   imports: [TypeOrmModule.forFeature([HomeEntity])],
   controllers: [HomeController],
   providers: [HomeService],
+  exports: [HomeService],
 })
 export class HomeModule {}

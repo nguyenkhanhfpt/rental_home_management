@@ -30,5 +30,26 @@
       "isNotEmpty": "Status is required",
       "isEnum": "Status is invalid"
     }
+  },
+  "roomEntity": {
+    "name": {
+      "isNotEmpty": "Name is required"
+    },
+    "shortName": {
+      "isNotEmpty": "Short name is required"
+    },
+    "homeId": {
+      "isNotEmpty": "Home ID is required"
+    },
+    "description": {
+      "isNotEmpty": "Description is required"
+    },
+    "basePrice": {
+      "isNotEmpty": "Base price is required"
+    },
+    "status": {
+      "isNotEmpty": "Status is required",
+      "isEnum": "Status is invalid"
+    }
   }
 }
