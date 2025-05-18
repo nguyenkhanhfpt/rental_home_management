@@ -3,41 +3,39 @@ import {
   ArgumentsHost,
   Catch,
   ExceptionFilter,
+  ForbiddenException,
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
 import { ErrorCodeConstant } from '@shared/constants';
 import { BaseErrorDto } from '@shared/dtos/base-error.dto';
+import { t } from '@shared/utils';
 import type { Response } from 'express';
-import { I18nContext } from 'nestjs-i18n';
 
-@Catch()
-export class InternalServerExceptionFilter implements ExceptionFilter {
+@Catch(ForbiddenException)
+export class PermissionExceptionFilter
+  implements ExceptionFilter<HttpException>
+{
   /**
    * Logger
    * @param loggerService
    */
   constructor(private readonly loggerService: LoggerService) {}
-  /**
-   * Implement internal server error
-   *
-   * @param {HttpException} exception
-   * @param {ArgumentsHost} host
-   */
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    const status = HttpStatus.INTERNAL_SERVER_ERROR;
-    const code = ErrorCodeConstant.internalServerError;
+    const status = HttpStatus.FORBIDDEN;
+    const code = ErrorCodeConstant.forbidden;
+    const message = t(`error.${code}`);
     const error: BaseErrorDto = {
       code,
-      message: I18nContext.current().t(`error.${code}`),
+      message,
     };
-    console.log(exception);
 
+    exception.message = message;
     this.loggerService.logErrorDetail(
       exception,
-      ErrorCodeConstant.internalServerError,
+      ErrorCodeConstant.unauthorized,
     );
     response.status(status).json(error);
   }

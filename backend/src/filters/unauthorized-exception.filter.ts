@@ -7,7 +7,7 @@ import {
   HttpStatus,
   UnauthorizedException,
 } from '@nestjs/common';
-import { errorCodeConstant } from '@shared/constants/error-code.constant';
+import { ErrorCodeConstant } from '@shared/constants';
 import { BaseErrorDto } from '@shared/dtos/base-error.dto';
 import { t } from '@shared/utils';
 import type { Response } from 'express';
@@ -25,7 +25,7 @@ export class UnauthorizedExceptionFilter
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const status = HttpStatus.UNAUTHORIZED;
-    const code = errorCodeConstant.unauthorized;
+    const code = ErrorCodeConstant.unauthorized;
     const message = t(`error.${code}`);
     const error: BaseErrorDto = {
       code,
@@ -35,7 +35,7 @@ export class UnauthorizedExceptionFilter
     exception.message = message;
     this.loggerService.logErrorDetail(
       exception,
-      errorCodeConstant.unauthorized,
+      ErrorCodeConstant.unauthorized,
     );
     response.status(status).json(error);
   }

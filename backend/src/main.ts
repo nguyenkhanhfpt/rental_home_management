@@ -15,6 +15,7 @@ import {
 import helmet from 'helmet';
 import { ConfigService } from '@nestjs/config';
 import { useContainer } from 'class-validator';
+import { PermissionExceptionFilter } from '@filters/permission-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -74,6 +75,7 @@ async function bootstrap() {
     new BadRequestExceptionFilter(loggerService),
     new NotFoundExceptionFilter(loggerService),
     new UnauthorizedExceptionFilter(loggerService),
+    new PermissionExceptionFilter(loggerService),
   );
 
   await app.listen(

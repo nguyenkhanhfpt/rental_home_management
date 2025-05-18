@@ -1,4 +1,4 @@
-export const errorCodeConstant = {
+export const ErrorCodeConstant = {
   forbidden: 'E403',
   internalServerError: 'E500',
   notFound: 'E404',
