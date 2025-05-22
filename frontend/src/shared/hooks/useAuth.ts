@@ -13,7 +13,12 @@ export const useAuth = () => {
       setLoading(true);
       setError(null);
       const response = await authService.login(data);
-      setUser(response.data);
+      setUser({
+        id: '1',
+        name: 'Khanh Nguyen',
+        email:  'khanhnguyen@gmail.com',
+        token:'1234567890',
+      });
       return response.data;
     } catch (err: any) {
       setError(err.message || 'Login failed');

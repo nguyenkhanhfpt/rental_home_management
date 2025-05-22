@@ -10,7 +10,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { RoomService } from '@modules/room/room.service';
-import { User } from '@decorators';
 import { RoomGuard } from '@guards';
 import { CreateRoomDto } from '@modules/room/dtos/req/create-room.dto';
 import { UpdateRoomDto } from '@modules/room/dtos/req/update-room.dto';
@@ -21,8 +20,8 @@ export class RoomController {
   constructor(private readonly roomService: RoomService) {}
 
   @Get()
-  getList(@User('id') userId: number, @Req() { home }: any) {
-    return this.roomService.getList(home.id, userId);
+  getList(@Req() { home }: any) {
+    return this.roomService.getList(home.id);
   }
 
   @Get(':id')

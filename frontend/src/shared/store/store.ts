@@ -3,9 +3,9 @@ import { persist } from 'zustand/middleware';
 import type { Store } from './types';
 
 const initialState = {
-  theme: 'light' as const,
+  theme: 'dark' as const,
   isAuthenticated: false,
-  user: null,
+  user: null
 };
 
 export const useStore = create<Store>()(
