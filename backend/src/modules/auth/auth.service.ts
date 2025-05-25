@@ -43,18 +43,24 @@ export class AuthService {
       throw new BadRequestException('Invalid credentials');
     }
 
-    return this.getTokens(user);
+    const { accessToken, refreshToken } = await this.getTokens(user);
+
+    return this.getAuthResponse(user, accessToken, refreshToken);
   }
 
   /**
    * Register user
    * @param registerDto
    */
-  async register(registerDto: RegisterDto) {
+  async register(
+    registerDto: RegisterDto,
+  ): Promise<{ accessToken: string; refreshToken: string }> {
     registerDto.password = await hashPassword(registerDto.password);
     const user = await this.userRepository.save(registerDto);
 
-    return this.getTokens(user);
+    const { accessToken, refreshToken } = await this.getTokens(user);
+
+    return this.getAuthResponse(user, accessToken, refreshToken);
   }
 
   logout() {
@@ -111,5 +117,21 @@ export class AuthService {
     ]);
 
     return { accessToken, refreshToken };
+  }
+
+  /**
+   * Get authentication response
+   * @param user
+   * @param accessToken
+   * @param refreshToken
+   */
+  getAuthResponse(user: UserEntity, accessToken: string, refreshToken: string) {
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      accessToken,
+      refreshToken,
+    };
   }
 }

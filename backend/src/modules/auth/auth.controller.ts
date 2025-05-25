@@ -23,7 +23,7 @@ export class AuthController {
 
   @Get('logout')
   logout() {
-    return 'Logout';
+    return this.authService.logout();
   }
 
   /**

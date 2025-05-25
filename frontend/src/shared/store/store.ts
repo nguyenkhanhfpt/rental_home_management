@@ -5,7 +5,7 @@ import type { Store } from './types';
 const initialState = {
   theme: 'dark' as const,
   isAuthenticated: false,
-  user: null
+  user: null,
 };
 
 export const useStore = create<Store>()(

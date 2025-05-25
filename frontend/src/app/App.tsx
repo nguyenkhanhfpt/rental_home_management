@@ -14,18 +14,21 @@ export const App = () => {
   return (
     <ErrorBoundary>
       <StoreProvider>
-      <div className="min-h-screen bg-background text-foreground">
-        <Routes>
-          <Route element={<SidebarLayout />}>
-            <Route path="/" element={<div>Rental Home Management {user?.name}</div>} />
-            <Route path="/home" element={<div>Home Page</div>} />
-            <Route path="story-book" element={<StoryBook />} />
-          </Route>
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
+        <div className="min-h-screen bg-background text-foreground">
+          <Routes>
+            <Route element={<SidebarLayout />}>
+              <Route
+                path="/"
+                element={<div>Rental Home Management {user?.name}</div>}
+              />
+              <Route path="/home" element={<div>Home Page</div>} />
+              <Route path="story-book" element={<StoryBook />} />
+            </Route>
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
       </StoreProvider>
     </ErrorBoundary>
   );

@@ -13,12 +13,8 @@ export const useAuth = () => {
       setLoading(true);
       setError(null);
       const response = await authService.login(data);
-      setUser({
-        id: '1',
-        name: 'Khanh Nguyen',
-        email:  'khanhnguyen@gmail.com',
-        token:'1234567890',
-      });
+      setUser(response.data);
+      window.localStorage.setItem('user', JSON.stringify(response.data));
       return response.data;
     } catch (err: any) {
       setError(err.message || 'Login failed');
@@ -34,6 +30,7 @@ export const useAuth = () => {
       setError(null);
       const response = await authService.register(data);
       setUser(response.data);
+      window.localStorage.setItem('user', JSON.stringify(response.data));
       return response.data;
     } catch (err: any) {
       setError(err.message || 'Registration failed');

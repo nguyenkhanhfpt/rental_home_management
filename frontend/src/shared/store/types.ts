@@ -8,8 +8,8 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  avatar?: string;
-  token?: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface Store extends AppState {
