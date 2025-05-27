@@ -7,7 +7,8 @@ import { Login } from '@pages/Login/ui/Login.tsx';
 import { SidebarLayout } from '@widgets/layouts/ui/SidebarLayout.tsx';
 import { StoreProvider } from '@app/providers/StoreProvider';
 import { useStore } from '@/shared/store/store';
-
+import { Home } from '@pages/Home/ui/Home';
+import { Create } from '@pages/Home/ui/Create';
 export const App = () => {
   const user = useStore((state) => state.user);
 
@@ -21,7 +22,8 @@ export const App = () => {
                 path="/"
                 element={<div>Rental Home Management {user?.name}</div>}
               />
-              <Route path="/home" element={<div>Home Page</div>} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/home/create" element={<Create />} />
               <Route path="story-book" element={<StoryBook />} />
             </Route>
             <Route path="register" element={<Register />} />
