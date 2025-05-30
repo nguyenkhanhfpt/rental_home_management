@@ -31,7 +31,9 @@ class ApiClient {
     // Request interceptor
     this.client.interceptors.request.use(
       (config) => {
-        const token = useStore.getState().user?.token;
+        const token =
+          useStore.getState().user?.accessToken ||
+          window.localStorage.getItem('accessToken');
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }

@@ -25,4 +25,11 @@ export const API_ENDPOINTS = {
     UPDATE: (id: string) => `/articles/${id}`,
     DELETE: (id: string) => `/articles/${id}`,
   },
+  HOME: {
+    LIST: '/homes',
+    DETAIL: (id: string) => `/homes/${id}`,
+    CREATE: '/homes',
+    UPDATE: (id: string) => `/homes/${id}`,
+    DELETE: (id: string) => `/homes/${id}`,
+  },
 } as const;
