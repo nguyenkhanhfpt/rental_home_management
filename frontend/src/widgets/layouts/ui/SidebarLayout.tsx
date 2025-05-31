@@ -9,8 +9,9 @@ export const SidebarLayout = () => {
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-64 transform bg-gray-800 text-white ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          } transition-transform duration-200 ease-in-out md:relative md:translate-x-0`}
+        className={`fixed inset-y-0 left-0 z-40 w-64 transform bg-gray-800 text-white ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } transition-transform duration-200 ease-in-out md:relative md:translate-x-0`}
       >
         <div className="space-y-6 p-6">
           <h2 className="text-2xl font-bold">
@@ -56,16 +57,20 @@ export const SidebarLayout = () => {
         </header>
 
         <main className="p-6">
-          <div className="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden" style={{ fontFamily: '"Plus Jakarta Sans", "Noto Sans", sans-serif' }}>
+          <div
+            className="group/design-root relative flex size-full min-h-screen flex-col overflow-x-hidden bg-slate-50"
+            style={{
+              fontFamily: '"Plus Jakarta Sans", "Noto Sans", sans-serif',
+            }}
+          >
             <div className="layout-container flex h-full grow flex-col">
-              <div className="px-5 flex flex-1 justify-center py-5">
-                <div className="layout-content-container flex flex-col max-w-[100%] flex-1">
+              <div className="flex flex-1 justify-center px-5 py-5">
+                <div className="layout-content-container flex max-w-[100%] flex-1 flex-col">
                   <Outlet />
                 </div>
               </div>
             </div>
           </div>
-
         </main>
       </div>
     </div>
