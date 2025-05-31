@@ -7,7 +7,7 @@ export const homeService = {
     return apiClient.get(API_ENDPOINTS.HOME.LIST);
   },
 
-  detail: (id: string) => {
+  detail: (id: number) => {
     return apiClient.get(API_ENDPOINTS.HOME.DETAIL(id));
   },
 
@@ -15,11 +15,11 @@ export const homeService = {
     return apiClient.post(API_ENDPOINTS.HOME.CREATE, data);
   },
 
-  update: (id: string, data: any) => {
+  update: (id: number, data: any) => {
     return apiClient.put(API_ENDPOINTS.HOME.UPDATE(id), data);
   },
 
-  delete: (id: string) => {
+  delete: (id: number) => {
     return apiClient.delete(API_ENDPOINTS.HOME.DELETE(id));
   },
 };
