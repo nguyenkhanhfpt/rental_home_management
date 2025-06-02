@@ -1,7 +1,7 @@
 import { homeService } from '@shared/api/services/home.service';
 
 export interface Home {
-  id: number;
+  id: number | null;
   name: string;
   shortName: string;
   address: string;
