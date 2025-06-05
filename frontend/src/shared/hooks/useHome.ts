@@ -1,11 +1,11 @@
 import { homeService } from '@shared/api/services/home.service';
 
 export interface Home {
-  id: number;
+  id: number | null;
   name: string;
   shortName: string;
   address: string;
-  status: number;
+  status?: string;
 }
 
 export function useHome() {
@@ -29,5 +29,32 @@ export function useHome() {
     }
   };
 
-  return { fetchHomes, fetchHome };
+  const createHome = async (home: Home) => {
+    try {
+      const response = await homeService.create(home);
+      return response.data as Home; // Assuming the response data is the created Home object
+    } catch (err: any) {
+    } finally {
+    }
+  };
+
+  const updateHome = async (home: Home) => {
+    try {
+      const response = await homeService.update(home.id as number, home);
+      return response.data as Home; // Assuming the response data is the updated Home object
+    } catch (err: any) {
+    } finally {
+    }
+  };
+
+  const deleteHome = async (homeId: number) => {
+    try {
+      const response = await homeService.delete(homeId);
+      return response.data; // Assuming the response data is a success message or status
+    } catch (err: any) {
+    } finally {
+    }
+  };
+
+  return { fetchHomes, fetchHome, createHome, updateHome, deleteHome };
 }
