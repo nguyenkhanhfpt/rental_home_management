@@ -3,14 +3,17 @@ import { Input } from '@widgets/form/ui/Input.tsx';
 import { useHomeFeature } from '@pages/Home/model/Home.ts';
 
 export const Create = () => {
-  const { formData, loading, handleChange } = useHomeFeature();
+  const { formData, loading, handleChange, handleCreate } = useHomeFeature();
 
   return (
     <div>
       <h1 className="mb-4 text-lg font-semibold text-black">Create New Home</h1>
 
       <div className="w-full space-y-6">
-        <form action="" className="space-y-6 rounded-xl bg-white p-6 shadow-md">
+        <form
+          onSubmit={handleCreate}
+          className="space-y-6 rounded-xl bg-white p-6 shadow-md"
+        >
           <Input
             label="Name"
             type="text"

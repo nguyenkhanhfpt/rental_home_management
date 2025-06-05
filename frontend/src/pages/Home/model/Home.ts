@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Home, useHome } from '@/shared/hooks/useHome';
+import { useNavigate } from 'react-router-dom';
 
 const initHomesState: Home[] = [];
 const initHomeState: Home | null = null;
@@ -9,7 +10,6 @@ const initFormData: Home = {
   name: '',
   shortName: '',
   address: '',
-  status: 1,
 };
 
 export const useHomeFeature = () => {
@@ -17,8 +17,9 @@ export const useHomeFeature = () => {
   const [home, setHome] = useState<Home | null>(initHomeState);
   const [searchHome, setSearchHome] = useState('');
   const [formData, setFormData] = useState<Home>(initFormData);
-  const { fetchHomes, fetchHome } = useHome();
+  const { fetchHomes, fetchHome, createHome } = useHome();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const getHomes = async () => {
     try {
@@ -64,6 +65,20 @@ export const useHomeFeature = () => {
     console.log(formData);
   };
 
+  const handleCreate = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      await createHome(formData);
+      navigate('/home'); // Redirect to home page after successful login
+    } catch (error: any) {
+      if (Array.isArray(error.errors)) {
+        // setFormErrors(newErrors);
+      } else {
+      }
+    }
+  };
+
   return {
     getHomes,
     homes,
@@ -76,5 +91,6 @@ export const useHomeFeature = () => {
     setFormData,
     loading,
     handleChange,
+    handleCreate,
   };
 };
