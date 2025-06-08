@@ -46,7 +46,6 @@ class ApiClient {
     this.client.interceptors.response.use(
       (response) => response,
       (error: AxiosError<ValidationErrorResponse[]>) => {
-        console.log(error.response);
         const apiError: ApiError = {
           message: error.message || 'An error occurred',
           code: error.code,
@@ -56,8 +55,60 @@ class ApiClient {
 
         // Handle specific error cases
         if (error.response?.status === 401) {
-          // Handle unauthorized access
-          useStore.getState().logout();
+          const token = useStore.getState().user?.refreshToken;
+
+          if (token) {
+            const user = useStore.getState().user;
+            useStore.getState().setUser({
+              ...user,
+              accessToken: '',
+            });
+            // Attempt to refresh the token
+            return this.client
+              .request({
+                method: 'GET',
+                url: '/auth/refresh',
+                headers: { Authorization: `Bearer ${token}` },
+              })
+              .then(
+                (
+                  response: AxiosResponse<
+                    ApiResponse<{ accessToken: string; refreshToken: string }>
+                  >
+                ) => {
+                  const { accessToken, refreshToken } = response.data;
+                  useStore
+                    .getState()
+                    .setUser({ ...user, accessToken, refreshToken });
+                  window.localStorage.setItem(
+                    'user',
+                    JSON.stringify({
+                      ...JSON.parse(
+                        window.localStorage.getItem('user') || '{}'
+                      ),
+                      accessToken,
+                      refreshToken,
+                    })
+                  );
+
+                  // Retry the original request with the new token
+                  if (error.config) {
+                    error.config.headers.Authorization = `Bearer ${accessToken}`;
+                    return this.client.request(error.config);
+                  }
+                }
+              )
+              .catch(() => {
+                // If refreshing fails, logout the user
+                console.error('Token refresh failed, logging out');
+                useStore.getState().logout();
+                window.localStorage.removeItem('user');
+              });
+          } else {
+            // If no token is available, logout the user
+            useStore.getState().logout();
+            window.localStorage.removeItem('user');
+          }
         }
 
         return Promise.reject(apiError);
