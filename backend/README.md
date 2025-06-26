@@ -32,6 +32,31 @@
 $ npm install
 ```
 
+## Running the app with Docker
+
+```bash
+# Build the Docker image
+$ docker-compose -f docker-compose.local.yml up -d
+
+# Exec the Docker container (API)
+$ docker-compose exec -it rental-home-api sh
+
+# Run npm ci
+$ npm ci
+
+# Run the migrations
+$ npm run migration:up
+
+# watch mode
+$ npm run start:dev
+
+# Exec the Docker container (Worker)
+$ docker-compose exec -it rental-home-worker sh
+
+# Run the worker
+$ npm run start:worker
+```
+
 ## Running the app
 
 ```bash
