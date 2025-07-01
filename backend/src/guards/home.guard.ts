@@ -1,15 +1,12 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { RoomEntity } from '@database/entities/room.entity';
 import { HomeEntity } from '@database/entities/home.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
-export class RoomGuard implements CanActivate {
+export class HomeGuard implements CanActivate {
   constructor(
-    @InjectRepository(RoomEntity)
-    private readonly roomRepository: Repository<RoomEntity>,
     @InjectRepository(HomeEntity)
     private readonly homeRepository: Repository<HomeEntity>,
   ) {}
@@ -28,27 +25,17 @@ export class RoomGuard implements CanActivate {
    */
   async validateRequest(request: any): Promise<boolean> {
     const userId = request.user.id;
-    const roomId = request.params.roomId;
-    const room = await this.roomRepository.findOneBy({
-      id: roomId,
-    });
-
-    if (!room) {
-      return false;
-    }
-
+    const homeId = request.params.homeId;
     const home = await this.homeRepository.findOneBy({
-      id: room.homeId,
+      id: homeId,
       userId: userId,
     });
 
     if (!home) {
       return false;
     }
+    request.home = home; // Attach the home entity to the request object
 
-    request.room = room;
-    request.home = home;
-
-    return true;
+    return true; // Allow access if validation passes
   }
 }

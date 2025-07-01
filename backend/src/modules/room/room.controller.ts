@@ -10,11 +10,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { RoomService } from '@modules/room/room.service';
-import { RoomGuard } from '@guards';
+import { HomeGuard } from '@guards';
 import { CreateRoomDto } from '@modules/room/dtos/req/create-room.dto';
 import { UpdateRoomDto } from '@modules/room/dtos/req/update-room.dto';
 
-@UseGuards(RoomGuard)
+@UseGuards(HomeGuard)
 @Controller('rooms/:homeId')
 export class RoomController {
   constructor(private readonly roomService: RoomService) {}
