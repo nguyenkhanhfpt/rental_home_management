@@ -9,6 +9,7 @@ import { StoreProvider } from '@app/providers/StoreProvider';
 import { useStore } from '@/shared/store/store';
 import { Home } from '@pages/Home/ui/Home';
 import { Create } from '@pages/Home/ui/Create';
+import { Detail } from '@pages/Home/ui/Detail.tsx';
 export const App = () => {
   const user = useStore((state) => state.user);
 
@@ -24,6 +25,7 @@ export const App = () => {
               />
               <Route path="/home" element={<Home />} />
               <Route path="/home/create" element={<Create />} />
+              <Route path="/home/:id" element={<Detail />} />
               <Route path="story-book" element={<StoryBook />} />
             </Route>
             <Route path="register" element={<Register />} />

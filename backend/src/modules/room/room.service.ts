@@ -88,7 +88,7 @@ export class RoomService {
    * @return {Promise<RoomEntity>}
    */
   detail(homeId: number, id: number): Promise<RoomEntity> {
-    return this.getRoomById(id, homeId, null, ['home']);
+    return this.getRoomById(id, homeId, null, ['home', 'info']);
   }
 
   /**

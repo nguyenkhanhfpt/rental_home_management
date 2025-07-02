@@ -49,7 +49,7 @@ export const Home = () => {
       <h2 className="pb-3 pt-5 text-[22px] font-bold leading-tight tracking-[-0.015em] text-[#0e161b]">
         Homes
       </h2>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(258px,1fr))] gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {homes.map(function (home) {
           return (
             <div key={home.id} className="flex flex-col gap-3 pb-3">

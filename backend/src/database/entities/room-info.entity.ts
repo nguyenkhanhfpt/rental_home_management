@@ -1,10 +1,11 @@
-import { Column, Entity, OneToOne } from 'typeorm';
+import {Column, Entity, JoinColumn, OneToOne} from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { RoomEntity } from '@database/entities/room.entity';
 
 @Entity({ name: 'room_info' })
 export class RoomInfoEntity extends BaseEntity {
   @OneToOne(() => RoomEntity, (room) => room.info)
+  @JoinColumn({ name: 'room_id' })
   room: RoomEntity;
 
   @Column()
